@@ -3,10 +3,11 @@ const firstNameInput = document.querySelector("#first-name-input");
 const lastNameInput = document.querySelector("#last-name-input");
 const emailInput = document.querySelector("#email-input");
 const passwordInput = document.querySelector("#password-input");
-const confirmPasswordInput = document.querySelector("#confirm-password-input");
+const passwordConfirm = document.querySelector("#password-confirm-input");
 
 // create reference for buttons.
 const submitBtn = document.querySelector("#submit-btn");
+const resetBtn = document.querySelector("#reset-btn");
 
 // simple email validation
 function validateEmail(email) {
@@ -27,17 +28,20 @@ lastNameInput.onkeyup = () => {
   lastNameInput.classList.remove("is-valid");
   lastNameInput.classList.remove("is-invalid");
 }
-emailInput.onkeyup =() => {
+
+emailInput.onkeyup = () => {
   emailInput.classList.remove("is-valid");
   emailInput.classList.remove("is-invalid");
 }
+
 passwordInput.onkeyup = () => {
   passwordInput.classList.remove("is-valid");
   passwordInput.classList.remove("is-invalid");
 }
-confirmPasswordInput.onkeyup = () => {
-  confirmPasswordInput.classList.remove("is-valid");
-  confirmPasswordInput.classList.remove("is-invalid");
+
+passwordConfirm.onkeyup = () => {
+  passwordConfirm.classList.remove("is-valid");
+  passwordConfirm.classList.remove("is-invalid");
 }
 
 // add callback function for submit button.
@@ -45,57 +49,57 @@ submitBtn.onclick = () => {
   isFirstNameOk = false;
 
   // validate first name
-  if (firstNameInput.value !== "CPE207") {
-    firstNameInput.classList.add("is-invalid");
-  } else {
+  if (firstNameInput.value !== "") {
     firstNameInput.classList.add("is-valid");
     isFirstNameOk = true;
+  } else {
+    firstNameInput.classList.add("is-invalid");
   }
 
   // validate last name
-  if (lastNameInput.value !== ""){
+  if (lastNameInput.value !== "") {
     lastNameInput.classList.add("is-valid");
-    isFirstNameOk = true;
+    isLastNameOk = true;
   } else {
     lastNameInput.classList.add("is-invalid");
   }
 
   // validate email
-  if (emailInput.value !== ""){
+  if (validateEmail(emailInput.value)) {
     emailInput.classList.add("is-valid");
     isemailOk = true;
   } else {
-    emailInput.classList.add("is-Invalid");
+    emailInput.classList.add("is-invalid");
   }
 
   // validate password
-  if (passwordInput.value.length >= 6){
+  if (passwordInput.value.length >= 6) {
     passwordInput.classList.add("is-valid");
-    isPasswordOk = true;
+    ispasswordOk = true;
   } else {
     passwordInput.classList.add("is-invalid");
   }
 
   // validate confirm password
-  if (passwordInput.value === passwordConfirm.value && passwordInput.value !== ""){
-    confirmPasswordInput.classList.add("is-valid");
+  if (passwordInput.value === passwordConfirm.value && passwordInput.value !== "") {
+    passwordConfirm.classList.add("is-valid");
     isConfirmPasswordOk = true;
   } else {
-    confirmPasswordInput.classList.add("is-invalid");
+    passwordConfirm.classList.add("is-invalid");
   }
 
-  console.log(isFirstNameOk, isLastNameOk, isemailOk, isPasswordOk, isConfirmPasswordOk);
+  console.log(isFirstNameOk, isLastNameOk, isemailOk, ispasswordOk, isConfirmPasswordOk);
 
-  if (isFirstNameOk) alert("Registered successfully");
+  if (isFirstNameOk && isLastNameOk && isemailOk && ispasswordOk && isConfirmPasswordOk) alert("Registered successfully");
 };
 
 // add callback function for Reset button.
-resetBin.onclick = () => {
+ resetBtn.onclick = () => {
   firstNameInput.value = "";
   lastNameInput.value = "";
   emailInput.value = "";
   passwordInput.value = "";
-  confirmPassword.value = "";
+  passwordConfirm.value = "";
 
   firstNameInput.onkeyup();
   lastNameInput.onkeyup();
